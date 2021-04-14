@@ -25,13 +25,16 @@ _USAGE
   exit 1
 fi
 
-#####main
-line_no="$(cat $2 |iconv -f $(nkf -g $2) -t UTF-8 | grep -n -E "$1" | cut -d : -f 1)"
+utf8_file=$(mktemp --suffix=_tresgrep)
 
-[[ "$line_no" == '' ]] && echo 'keyword not found' && exit 1
+iconv -f UCS-2LE -t UTF-8 "$2" > "$utf8_file"
 
-#echo "$line_no"
+line_no="$(grep -n -E $1 $utf8_file | cut -d ':' -f 1)"
 
-sed -n -e "$line_no",+"$(wc -l $2 |cut -d ' ' -f 1)"p "$2" |iconv -f $(nkf -g "$2") -t UTF-8
+[[ -z $line_no ]] && echo 'keyword not found' && exit 1
 
+sed -n -e "$line_no",+"$(wc -l $utf8_file |cut -d ' ' -f 1)"p "$utf8_file" | \
+    iconv -f UTF-8 -t CP932
+
+[[ $? == 0 ]] && trap "rm -f $utf8_file" EXIT
 
