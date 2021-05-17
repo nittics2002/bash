@@ -8,26 +8,22 @@
 set -e
 #set -x
 
-npp_xml=./php.xml
-vim_xml=/usr/share/vim/vim82/syntax/php.vim
+npp_xml=./langs.xml.txt
+ide_xml=./webStrorm.php.xml
 
 comm -13 <( \
-  sed -r -n -e '/<KeyWord/p' "$npp_xml" \
-    | sed -r -e 's/^.*<.+name="//' \
-    | sed -r -e 's/".+>//' \
+  tr ' ' '\n' < "$npp_xml" \
+    | sed -r -e '/^$/d' \
     |sort \
   ) \
   <( \
-  sed -r -n '/phpFunctions.+contained/p'  < "$vim_xml" \
-    |sed -r 's/^.+phpFunctions //' \
-    |sed -r 's/contained.*$//' \
-    |tr ' ' '\n' \
-    |sed -r -n '/\S+/p' \
-    |sort
+  sed -n -r -e '/<keywords keywords="/p' <"$ide_xml" \
+    | sed -r -e 's/^.+<keywords keywords="//' \
+    | sed -r -e 's/"\s+ignore.+\/>$//' \
+    | tr ';' '\n' \
+    | sed -r -e '/^.+::.+$/d' \
+    |sort \
   ) \
-    |sed -r 's/^(\S*)/<KeyWord name="\1" func="yes">/' \
-    |sed -r 'a \
-</KeyWord>' \
 
 
 
