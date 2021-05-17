@@ -8,12 +8,13 @@
 set -e
 #set -x
 
-npp_xml=./langs.xml.txt
+npp_xml=./php.xml
 vim_xml=/usr/share/vim/vim82/syntax/php.vim
 
 comm -13 <( \
-  tr ' ' '\n' < "$npp_xml" \
-    | sed -r -e '/^$/d' \
+  sed -r -n -e '/<KeyWord/p' "$npp_xml" \
+    | sed -r -e 's/^.*<.+name="//' \
+    | sed -r -e 's/".+>//' \
     |sort \
   ) \
   <( \
@@ -24,6 +25,9 @@ comm -13 <( \
     |sed -r -n '/\S+/p' \
     |sort
   ) \
-\
+    |sed -r 's/^(\S*)/<KeyWord name="\1" func="yes">/' \
+    |sed -r 'a \
+</KeyWord>' \
+
 
 
