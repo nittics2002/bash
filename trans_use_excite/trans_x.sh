@@ -18,7 +18,7 @@ cd "$(cd $(dirname ${BASH_SOURCE[0]:-}); pwd)"
 
 target_text=
 
-while read line
+while read -p "変換文字列入力:" line
 do
     target_text+="$line. "
 done
@@ -43,27 +43,42 @@ fi
 cookie_file_path=$(mktemp)
 excite_page=$(mktemp)
 
-#POSTデータ
-post_data=$(cat <<EOL2 |tr -d "\n"
+one_line_data="$(echo $target_text |tr -d \n)"
+
+declare -i data_length=${#one_line_data}
+
+for (( i = 0; i < $data_length; i = i + 2000 ))
+do
+
+  #POSTデータ
+  post_data=$(cat <<EOL2
 auto_detect_flg=0
 &auto_detect=on
-&before=$target_text
+&before=${one_line_data:$i:2000}
 EOL2
-)
+  )
 
-#POST翻訳データ
-curl -c "$cookie_file_path" \
-  -b $cookie_file_path \
-  -o "$excite_page" \
-  -s \
-  -XPOST --data "$post_data" \
-  "$excite_url" 
+  #POST翻訳データ
+  curl -c "$cookie_file_path" \
+    -b $cookie_file_path \
+    -o "$excite_page" \
+    -s \
+    -XPOST --data "$post_data" \
+    "$excite_url" 
 
-#翻訳結果を抽出
-#翻訳した文字列 #id="after"
+  #翻訳結果を抽出
+  #翻訳した文字列 #id="after"
 
-cat "$excite_page" \
-  |sed -r -n -e '/id="after"/p' \
-  |perl -p -e 's/<textarea.+(?<=>)(.*)<\/textarea>/\1/' \
-  |sed -r -e 's/^\s+//' -e 's/&#010;/ /g' 
+  cat "$excite_page" \
+    |sed -r -n -e '/id="after"/p' \
+    |perl -p -e 's/<textarea.+(?<=>)(.*)<\/textarea>/\1/' \
+    |sed -r -e 's/^\s+//' -e 's/&#010;/ /g' 
+
+  
+  
+done
+
+
+exit
+
 

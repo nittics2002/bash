@@ -17,3 +17,7 @@ excite_trance>cat <<EOL |xargs -0 ./trans_use_excite.sh EN JA
  Please lend me.
 EOL
 `
+
+##変更履歴
+
+- 210815 2000文字以上の入力に対応.ただし単語が切れる
