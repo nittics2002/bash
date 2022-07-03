@@ -12,8 +12,6 @@ function var_dump(){
     do
         echo "${x}"
     done
-
-    echo
 }
 
 #
@@ -39,14 +37,15 @@ EOL
 #
 #' && exit 11
 
-echo "${1}"
-echo "${2}"
+echo "target=${1}"
+echo "pattern=${2}"
 
 arr=($(str_split "${1}" "${2}" ))
 
-echo "${#arr[@]}"
+echo "split count=${#arr[@]}"
 
+echo --------------------
 var_dump "${arr[@]}"
-
+echo --------------------
 
 
