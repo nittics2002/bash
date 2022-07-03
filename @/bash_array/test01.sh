@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e
+#set -x
+
 #####
 # var_dump
 #####
@@ -13,16 +16,32 @@ function var_dump(){
     echo
 }
 
+function split() {
+echo "${file_path}" | \
+    sed -r -e 's|\/|\n|g' | \
+    sed -r -e "s|(.*)|'\1'|g"
+}
 
-#初期化
-declare -a arr1=(a b c d e f g)
-arr2=(h i j k)
-arr3[11]=o
-arr3[13]=q
-arr4=([1]=t [2]=u [4]=w)
-arr5=(A B '' D)
+file_path='http://aaa/bbb/ccc/ddd/eee.fff?ggg=hhh&iii=jjj'
 
-var_dump "${arr5[@]}"
+#echo "$file_path"
+
+
+#echo "${file_path}" |sed -r -e 's|\/| |g' -e "s|([0-9a-zA-Z]*)|'\1'\\n|g"
+#echo "${file_path}" | \
+#    sed -r -e 's|\/| |g' -e "s|(\b)|\1\n|g" -e "s|(.*)|'\1'|"
+
+
+#echo "${file_path}" | \
+#    sed -r -e 's|\/|\n|g' | \
+#    sed -r -e "s|(.*)|'\1'|g"
+
+
+arr=($(split "$file_path"))
+
+echo "${#arr[@]}"
+
+var_dump "${arr[@]}"
 
 
 
