@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+#set -e
 #set -x
 
 #####
@@ -20,15 +20,29 @@ function var_dump(){
 #
 #
 #
-function split() {
+function str_split() {
 echo "${1}" | \
     sed -r -e "s|${2}|\n|g" | \
     sed -r -e "s|(.*)|'\1'|g"
 }
 
-file_path='http://aaa/bbb/ccc/ddd/eee.fff?ggg=hhh&iii=jjj'
 
-arr=($(split "$file_path" "/" ))
+[[ $# != 2 ]] && cat <<EOL && exit 11
+
+str_split file regex
+
+EOL
+
+#[[ $# != 2 ]] && cat <<<'
+#
+#split file regex
+#
+#' && exit 11
+
+echo "${1}"
+echo "${2}"
+
+arr=($(str_split "${1}" "${2}" ))
 
 echo "${#arr[@]}"
 
