@@ -1,0 +1,430 @@
+++ realpath .
++ current_dir=/home/user/document/src/bash/@/npp_pwq
++ function_list_url=https://docs.microsoft.com/ja-jp/powerquery-m/power-query-m-func
++ function_xpath='//li/a[@data-linktype="relative-path"]'
+++ download_and_parse https://docs.microsoft.com/ja-jp/powerquery-m/power-query-m-func '//li/a[@data-linktype="relative-path"]'
+++ curl -L https://docs.microsoft.com/ja-jp/powerquery-m/power-query-m-func
+++ xmllint --html --xpath '//li/a[@data-linktype="relative-path"]' -
+++ xmllint --html --c14n -
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0-:187: HTML parser error : Tag header invalid
+er role="banner" itemscope="itemscope" itemtype="http://schema.org/Organization"
+                                                                               ^
+-:211: HTML parser error : Tag section invalid
+			<section class="primary-holder column ">
+			                                       ^
+-:218: HTML parser error : Tag main invalid
+						<main id="main" role="main" data-bi-name="content" lang="ja-jp" dir="ltr">
+						                                                                         ^
+-:243: HTML parser error : htmlParseCharRef: missing semicolon
+matrix&#39; values=&#39;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0&#39; result=&#
+                                                                               ^
+-:243: HTML parser error : htmlParseCharRef: invalid xmlChar value 0
+matrix&#39; values=&#39;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0&#39; result=&#
+                                                                               ^
+-:243: HTML parser error : AttValue: " expected
+matrix&#39; values=&#39;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0&#39; result=&#
+                                                                               ^
+-:243: HTML parser error : Couldn't find end of Start Tag img
+matrix&#39; values=&#39;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0&#39; result=&#
+                                                                               ^
+100 54165  100 54165    0     0   288k      0 --:--:-- --:--:-- --:--:--  289k
+-:244: HTML parser error : Unexpected end tag : div
+		</div>
+		      ^
+-:245: HTML parser error : Tag section invalid
+		<section class="message-container column is-8 has-text-wrap">
+		                                                            ^
+-:251: HTML parser error : Unexpected end tag : div
+	</div>
+	      ^
+-:252: HTML parser error : Unexpected end tag : div
+</div>
+      ^
+-:254: HTML parser error : Unexpected end tag : div
+							</div>
+							      ^
+-:260: HTML parser error : Unexpected end tag : main
+						</main>
+						       ^
+-:280: HTML parser error : Tag footer invalid
+	<footer id="footer-interactive" data-bi-name="footer" class="footer-layout">
+	                                                                           ^
+-:310: HTML parser error : Tag svg invalid
+								viewBox="0 0 22 14">
+								                   ^
+-:311: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background" />
+								                                                              ^
+-:312: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+								                                                                   ^
+-:313: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:314: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:315: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+								                                                                   ^
+-:316: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+								                                                                  ^
+-:317: HTML parser error : Tag rect invalid
+						<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" 
+						                                                                         ^
+-:318: HTML parser error : Tag rect invalid
+						<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" 
+						                                                                         ^
+-:334: HTML parser error : Tag svg invalid
+								viewBox="0 0 22 14">
+								                   ^
+-:335: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background" />
+								                                                              ^
+-:336: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+								                                                                   ^
+-:337: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:338: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:339: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+								                                                                   ^
+-:340: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+								                                                                  ^
+-:341: HTML parser error : Tag rect invalid
+						<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" 
+						                                                                         ^
+-:342: HTML parser error : Tag rect invalid
+						<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" 
+						                                                                         ^
+-:358: HTML parser error : Tag svg invalid
+								viewBox="0 0 22 14">
+								                   ^
+-:359: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background" />
+								                                                              ^
+-:360: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+								                                                                   ^
+-:361: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:362: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:363: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+								                                                                   ^
+-:364: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+								                                                                  ^
+-:365: HTML parser error : Tag rect invalid
+						<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" 
+						                                                                         ^
+-:366: HTML parser error : Tag rect invalid
+						<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" 
+						                                                                         ^
+-:392: HTML parser error : Unexpected end tag : div
+					</div>
+					      ^
+-:395: HTML parser error : Unexpected end tag : div
+				</div>
+				      ^
+-:398: HTML parser error : Unexpected end tag : section
+			</section>
+			          ^
+-:402: HTML parser error : Tag aside invalid
+="interactive-container is-visible-interactive column has-body-background-dark "
+                                                                               ^
+-:405: HTML parser error : Unexpected end tag : div
+		</div>
+		      ^
+-:407: HTML parser error : Unexpected end tag : div
+	</div>
+	      ^
+-:410: HTML parser error : Tag section invalid
+ection class="border-top has-default-focus is-hidden-interactive margin-top-sm "
+                                                                               ^
+-:414: HTML parser error : Tag footer invalid
+name="footer" class="footer-layout uhf-container has-padding" role="contentinfo"
+                                                                               ^
+-:444: HTML parser error : Tag svg invalid
+								viewBox="0 0 22 14">
+								                   ^
+-:445: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background" />
+								                                                              ^
+-:446: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+								                                                                   ^
+-:447: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:448: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:449: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+								                                                                   ^
+-:450: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+								                                                                  ^
+-:451: HTML parser error : Tag rect invalid
+						<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" 
+						                                                                         ^
+-:452: HTML parser error : Tag rect invalid
+						<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" 
+						                                                                         ^
+-:468: HTML parser error : Tag svg invalid
+								viewBox="0 0 22 14">
+								                   ^
+-:469: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background" />
+								                                                              ^
+-:470: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+								                                                                   ^
+-:471: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:472: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:473: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+								                                                                   ^
+-:474: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+								                                                                  ^
+-:475: HTML parser error : Tag rect invalid
+						<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" 
+						                                                                         ^
+-:476: HTML parser error : Tag rect invalid
+						<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" 
+						                                                                         ^
+-:492: HTML parser error : Tag svg invalid
+								viewBox="0 0 22 14">
+								                   ^
+-:493: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background" />
+								                                                              ^
+-:494: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+								                                                                   ^
+-:495: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:496: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+								                                                                  ^
+-:497: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+								                                                                   ^
+-:498: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+								                                                                  ^
+-:499: HTML parser error : Tag rect invalid
+						<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" 
+						                                                                         ^
+-:500: HTML parser error : Tag rect invalid
+						<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" 
+						                                                                         ^
+-:527: HTML parser error : Unexpected end tag : body
+</body>
+       ^
+-:139: HTML parser error : Tag header invalid
+er role="banner" itemscope="itemscope" itemtype="http://schema.org/Organization"
+                                                                               ^
+-:163: HTML parser error : Tag section invalid
+			<section class="primary-holder column ">
+			                                       ^
+-:170: HTML parser error : Tag main invalid
+						<main id="main" role="main" data-bi-name="content" lang="ja-jp" dir="ltr">
+						                                                                         ^
+-:208: HTML parser error : Tag section invalid
+		<section class="message-container column is-8 has-text-wrap">
+		                                                            ^
+-:244: HTML parser error : Tag footer invalid
+	<footer id="footer-interactive" data-bi-name="footer" class="footer-layout">
+	                                                                           ^
+-:265: HTML parser error : Tag svg invalid
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 22 14">
+							                                                                       ^
+-:266: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								                                                             ^
+-:267: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rec
+								                                                                  ^
+-:268: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:269: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:270: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rec
+								                                                                  ^
+-:271: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect
+								                                                                 ^
+-:272: HTML parser error : Tag rect invalid
+							<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"
+							                                                                        ^
+-:273: HTML parser error : Tag rect invalid
+							<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"
+							                                                                        ^
+-:285: HTML parser error : Tag svg invalid
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 22 14">
+							                                                                       ^
+-:286: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								                                                             ^
+-:287: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rec
+								                                                                  ^
+-:288: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:289: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:290: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rec
+								                                                                  ^
+-:291: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect
+								                                                                 ^
+-:292: HTML parser error : Tag rect invalid
+							<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"
+							                                                                        ^
+-:293: HTML parser error : Tag rect invalid
+							<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"
+							                                                                        ^
+-:305: HTML parser error : Tag svg invalid
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 22 14">
+							                                                                       ^
+-:306: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								                                                             ^
+-:307: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rec
+								                                                                  ^
+-:308: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:309: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:310: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rec
+								                                                                  ^
+-:311: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect
+								                                                                 ^
+-:312: HTML parser error : Tag rect invalid
+							<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"
+							                                                                        ^
+-:313: HTML parser error : Tag rect invalid
+							<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"
+							                                                                        ^
+-:349: HTML parser error : Tag aside invalid
+="interactive-container is-visible-interactive column has-body-background-dark "
+                                                                               ^
+-:357: HTML parser error : Tag section invalid
+ection class="border-top has-default-focus is-hidden-interactive margin-top-sm "
+                                                                               ^
+-:361: HTML parser error : Tag footer invalid
+name="footer" class="footer-layout uhf-container has-padding" role="contentinfo"
+                                                                               ^
+-:382: HTML parser error : Tag svg invalid
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 22 14">
+							                                                                       ^
+-:383: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								                                                             ^
+-:384: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rec
+								                                                                  ^
+-:385: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:386: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:387: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rec
+								                                                                  ^
+-:388: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect
+								                                                                 ^
+-:389: HTML parser error : Tag rect invalid
+							<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"
+							                                                                        ^
+-:390: HTML parser error : Tag rect invalid
+							<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"
+							                                                                        ^
+-:402: HTML parser error : Tag svg invalid
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 22 14">
+							                                                                       ^
+-:403: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								                                                             ^
+-:404: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rec
+								                                                                  ^
+-:405: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:406: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:407: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rec
+								                                                                  ^
+-:408: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect
+								                                                                 ^
+-:409: HTML parser error : Tag rect invalid
+							<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"
+							                                                                        ^
+-:410: HTML parser error : Tag rect invalid
+							<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"
+							                                                                        ^
+-:422: HTML parser error : Tag svg invalid
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 22 14">
+							                                                                       ^
+-:423: HTML parser error : Tag rect invalid
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								                                                             ^
+-:424: HTML parser error : Tag rect invalid
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rec
+								                                                                  ^
+-:425: HTML parser error : Tag rect invalid
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:426: HTML parser error : Tag rect invalid
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect
+								                                                                 ^
+-:427: HTML parser error : Tag rect invalid
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rec
+								                                                                  ^
+-:428: HTML parser error : Tag rect invalid
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect
+								                                                                 ^
+-:429: HTML parser error : Tag rect invalid
+							<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"
+							                                                                        ^
+-:430: HTML parser error : Tag rect invalid
+							<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"
+							                                                                        ^
+XPath set is empty
++ echo ''
