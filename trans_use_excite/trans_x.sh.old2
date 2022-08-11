@@ -98,11 +98,11 @@ EOL2
   #翻訳した文字列 #id="after"
 
   cat "$excite_page" \
-    |tr "\n" "\0" \
-    |sed -r -e 's/</\n</g' \
     |sed -r -n -e '/id="after"/p' \
-    |perl -p -e 's/<textarea.+>//' \
-    |tr "\0" "\n"
+    |perl -p -e 's/<textarea.+(?<=>)(.*)<\/textarea>/\1/' \
+    |sed -r -e 's/^\s+//' -e 's/&#010;/\n/g' 
+
+  
   
 done
 
