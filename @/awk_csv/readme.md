@@ -1,5 +1,10 @@
 #EXCEL CSV処理
 
+##221117
+
+- col2row.awk OK
+- splited.txt を加工する処理要検討
+
 ##221126
 
 - CSVを基本的に分割するのはOK
