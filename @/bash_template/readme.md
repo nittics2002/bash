@@ -1,11 +1,20 @@
 #
 
-##230113
+##230114
 
-- option 解析テスト中
-- case --)で＄Argsに残りの引数を代入しforを抜けたいが・・・
-- eval set ...は削除できないのか?
-    - for in "$@"でないとだめ?
+###サブシェル
+
+下記はchild関数をサブシェルで実行した
+自scriptの $$ と child()内の$$は同じで 自分$$値
+
+- 関数宣言をfunction child() ( expression )
+- 呼び出し child
+
+- 関数宣言をfunction child() { expression }
+- 呼び出し ( child )
+
+- 関数宣言をfunction child() { expression }
+- 呼び出し child &
 
 
 
