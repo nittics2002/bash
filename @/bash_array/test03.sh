@@ -1,24 +1,53 @@
 #!/bin/bash
-#
-#   関数の引数にarrayを渡す(リファレンス渡し)
-#
-#
 
 function child()
 {
-    declare -n argv=$1
-
-    echo "${argv[@]}" |xargs -n 1  echo
+    arr=(aaa bbb ccc)
+    ( IFS=, echo "${arr[*]}" )
 }
 
 function parent()
 {
+    { IFS=, ; arr=$(child) ; }
 
-    local aaa=( aaa bbb ccc ddd )
-    child aaa
+    for x in "${arr[@]}"
+    do
+        echo "${x}"
+    done
 }
 
 parent
+
+echo xxx${IFS}xxx
+
+exit
+
+##########################
+
+
+arr=( aaa bbb ccc ddd eee fff ggg hhh)
+
+
+for (( i=0; i<"${#arr[@]}"; i++ ))
+do
+    echo "${arr[${i}]}"
+done
+
+
+exit
+
+############
+
+for x in "${!arr[@]}"
+do
+    echo "$x"
+done
+
+for x in "${!arr[*]}"
+do
+    echo "$x"
+done
+
 
 
 
