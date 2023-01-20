@@ -4,18 +4,21 @@
 #
 #
 
-aaa=( aaa bbb ccc ddd )
-
-function destruct()
+function child()
 {
     declare -n argv=$1
 
     echo "${argv[@]}" |xargs -n 1  echo
 }
 
-destruct aaa
+function parent()
+{
 
+    local aaa=( aaa bbb ccc ddd )
+    child aaa
+}
 
+parent
 
 
 
