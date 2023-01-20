@@ -1,28 +1,35 @@
 #!/bin/bash
 #
-#   array
+# 
 #
 #
 
-aaa=( aaa bbb ccc ddd )
-
-#for x in "${aaa[@]}" ;
-#do
-#    echo "${x}"
-#done
 #
-#echo "${aaa[@]}" |xargs -n 1  echo
-
-function destruct()
+#   clean_tmpfiles
+#
+#   @param int exit_status
+#   @param &array file_path
+#
+function clean_tempfiles()
 {
-    declare -n argv=$1
+    local status=$1
+    shift
+    declare -n file_paths="$@"
 
-    echo "${argv[@]}" |xargs -n 1  echo
+    [[ ${#file_paths[@]} == 0 ]] && exit 0
+
+    echo "${file_paths[@]}" |xargs rm -f
+
+    exit $status
 }
 
-set -x
+tmpfile[0]=$(mktemp)
+tmpfile[1]=$(mktemp)
+tmpfile[2]=$(mktemp)
 
-destruct aaa
+trap 'clean_tempfiles $? tmpfile' EXIT INT PIPE TERM
+
+
 
 
 
