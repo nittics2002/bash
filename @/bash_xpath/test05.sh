@@ -3,6 +3,7 @@
 # xpath式parse 
 #
 
+declare -i MAX_LOOP_COUNT=100
 
 #
 # @param string &xpath
@@ -15,26 +16,23 @@ function parse_node()
     local -n _xpath="$2"
     local -n _i="$3"
     local -n _pos="$4"
-   
-    while true
+    local -i cnt=0
+
+    while [[ ${cnt} -lt MAX_LOOP_COUNT ]]
+    do
         ch="${_xpath:${_i}:1}"
         
-        if [[ -z ${ch} ]]
+        if [[ $ch =~ [A-Za-z0-9*] ]]
         then
-           return 1 #xpathを最終までスキャン
-        fi
-
-
-
-        if [[ $1 =~ [A-Za-z0-9*] ]]
-        then
-            _token[${_pos}]+=
-            break
+            _tokens[${_pos}]+=$ch
         else
-
-            break
+            _i--
+            return 0
         fi
 
+        _i++
+        cnt++
+    done
 }
 
 
@@ -70,8 +68,8 @@ function xpath_parse()
 
         parse_node tokens xpath i pos
 
-        echo "${ret}"
-
+        echo "${tokens[@]}"
+    done
 
 }
 
