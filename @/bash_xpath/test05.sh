@@ -11,12 +11,29 @@
 #
 function parse_node()
 {
-    if [[ $1 =~ [A-Za-z0-9*] ]]
-    then
-       break 
-    else
-        break
-    fi
+    local -n _tokens="$1"
+    local -n _xpath="$2"
+    local -n _i="$3"
+    local -n _pos="$4"
+   
+    while true
+        ch="${_xpath:${_i}:1}"
+        
+        if [[ -z ${ch} ]]
+        then
+           return 1 #xpathを最終までスキャン
+        fi
+
+
+
+        if [[ $1 =~ [A-Za-z0-9*] ]]
+        then
+            _token[${_pos}]+=
+            break
+        else
+
+            break
+        fi
 
 }
 
@@ -44,33 +61,16 @@ function xpath_parse()
 
     local xpath="$1"
 
-    #for (( i=0; i<${#1}; i++ ))
     for (( i=0; i<${#xpath}; i++ ))
     do
+
         #echo "${1:$i:1}"
 
-        ch="${1:$i:1}"
+        #ch="${1:$i:1}"
 
-        if [[ node -lt 2 -a -z braket -a ch =~ / ]]
-        then
-            node+=1
-            tokens[${pos}]+=${ch}
-        elif [[ -z bracket -a ch == [ ]]
-        then
-            bracket=t
-            node=0
-            pos++
-            tokens[${pos}]+=${ch}
+        parse_node tokens xpath i pos
 
-
-
-
-        fi
-
-    done
-
-    echo -----last
-    echo "${tokens[@]}"
+        echo "${ret}"
 
 
 }
