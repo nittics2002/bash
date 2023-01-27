@@ -1,16 +1,19 @@
 #!/bin/bash
 #
-#
+# 軸方向を検索
 #
 
 #set -x
 
-
+#
+#
+# @param restructed_file
+# @param ...xpath
+#
 function lexcer()
 {
-
-    file=./ddd.htm
-
+    local file="$1"
+    shift
 
     for path in "$@"
     do
@@ -24,7 +27,7 @@ function lexcer()
 
             echo "---${tag}"
 
-            matches="$(grep -E -i ^\<${tag} ${file})"
+            matches="$(grep -E -i -n ^\<${tag} ${file})"
 
             echo "${matches}"
 
@@ -37,9 +40,10 @@ function lexcer()
 }
 
 
-paths="/!DOCTYPE /html /head"
+file=./ddd.htm
+paths="/!DOCTYPE /html /head /meta"
 
-lexcer ${paths}
+lexcer ${file} ${paths}
 
 
 
