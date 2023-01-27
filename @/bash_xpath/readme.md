@@ -5,6 +5,8 @@
 - parseしたxpathから抽出を行う
 
 
+基本正規表現(BRE)と拡張正規表現(ERE) Quita
+https://qiita.com/ko1nksm/items/53abc144558b9bb5629f
 
 
 ##230121
