@@ -41,6 +41,8 @@ done
 echo
 echo "##pop(値取得無し)"
 
+#printf '%s\n' は echo -e でもOK
+#以下同様
 str_array=$(IFS= ; printf '%s\n' ${str_array} |sed '$d')
 
 for x in "${str_array}"
