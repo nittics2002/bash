@@ -184,7 +184,17 @@ echo xxx${IFS}xxx #xxx XXX IFSは影響なし
 
 ```
 
+###存在確認
 
+```bash
+
+if printf '%s\n' "${array[@]" |grep -qx "${key}"; then
+    echo 0
+else
+    echo 1
+fi
+
+```
 
 ##参考
 
@@ -193,5 +203,9 @@ https://takuya-1st.hatenablog.jp/entry/2016/12/27/053456
 
 bashの配列とは？事例で分かる配列の使い方をまとめて紹介
 https://and-engineer.com/articles/YRsLrhAAACRz7nVV
+
+【Bash】配列に値が含まれているか確認する方法
+https://qiita.com/Hayao0819/items/0e04b39b0804a0d16020
+
 
 
