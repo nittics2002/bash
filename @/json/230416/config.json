@@ -1,0 +1,19 @@
+{
+    "urls": [
+        {
+            "method": "post",
+            "url": "https://foo/bar/bas?aaa=A&bbb=B",
+            "headers": [
+                "Content-Type": "text/plain",
+                "Cookie": [
+                    "userid": "12",
+                    "": ""
+                ],
+            "body": [
+                "user": "USER1",
+                "password": "PASS1"
+            ]
+        }
+    ]
+}
+
