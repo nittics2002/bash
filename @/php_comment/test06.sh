@@ -26,6 +26,7 @@ BEGIN{
                 addComment();
                 addStack($0);
                 outputStack();
+                ifFunction = false;
 
             } else {
                 ifFunction = true;
@@ -56,7 +57,23 @@ END {
 
 function addComment()
 {
+    if(substr($1, 0, 1) == " "){
+        tabString = $1;
+    } else {
+        tabString = "";
+    }
 
+    addStack(tabString "/**");
+    addStack(tabString " *");
+    addStack(tabString " * " methodName);
+    addStack(tabString " *");
+
+    for(i in arArgs){
+        addStack(tabString " * @param " arArgs[i]);
+    }
+
+    addStack(tabString " *");
+    addStack(tabString " */");
 }
 
 function getSyntax()
