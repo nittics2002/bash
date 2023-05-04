@@ -79,6 +79,11 @@ function getSyntax()
     split($0, arSyntax1, "\(");
     getMethod(arSyntax1[0]);
 
+print $0;
+print arSyntax1[0];
+print length(arSyntax1);
+
+
     if (length(arSyntax1) == 1){
         return;
     }
@@ -138,7 +143,7 @@ function addStack(row)
 function outputStack()
 {
     for(i = 0; i < stackIndex; i++){
-        print arStack[i];
+#        print arStack[i];
     }
     
     delete arStack;
