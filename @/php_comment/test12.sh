@@ -21,25 +21,19 @@ BEGIN{
 }
 {
     if (match($0, "function") > 0){
-        if(!hasComment()){
+        if(hasComment() == false){
             getSyntax();
-            
-
-print $0;
-
-
             if(hasBrace() == true){
-
-
-print "------------------";
-
-
-
                 addComment();
                 addStack($0);
                 outputStack();
                 ifFunction = false;
             } else {
+
+
+print "AAAAAAAAAAAAAAAAAA";
+
+
                 ifFunction = true;
             }
 
@@ -47,10 +41,10 @@ print "------------------";
             addStack($0);
             outputStack();
         }
-    } else if (isFunction){
+    } else if (isFunction == true){
         getSyntax();
         
-        if(hasBrace()){
+        if(hasBrace() == true){
             addComment();
             addStack($0);
             outputStack();
