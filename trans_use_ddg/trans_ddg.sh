@@ -2,47 +2,65 @@
 #
 # DuckDuckGo翻訳を使う
 #
-#trans_ddg.sh [-f jp] file
-#
-# @example
-# trans_ddg.sh <<EOL
-#  A history is GA loving for me!
-#  Do you have a book?
-#  Please lend me.
-#EOL
-#
-#
 
 set -e
 #set -x
 
+if [[ $1 == --help ]] ; then
+  cat <<-'EOL'
+
+trans_ddg. [OPTIONS] file
+
+ OPTIONS
+  -f LANG
+    LANGから日本語変換
+    LANG:enなど
+　-j
+    日本語から英語に変換
+ file 変換する文字列 または ヒアドキュメント
+
+EOL
+  exit 1
+fi
+
 cd "$(cd $(dirname ${BASH_SOURCE[0]:-}); pwd)"
 
-while getopts f: opt
+from_lang=en
+to_lang=ja
+
+while getopts f:j opt
 do
     case "${opt}" in
         f)
-            if [[ ${OPTARG,,[A-Z]} == ja ]] ;
-            then
-                from_lang=${OPTARG,,[A-Z]}
-            fi
+            from_lang=${OPTARG,,[A-Z]}
+            shift 2
+            ;;
+        j)
+            from_lang=ja
+            to_lang=en
+            shift
             ;;
     esac
 done
 
-to_lang=ja
-
-if [[ -n $from_lang ]] ;
-then
-    to_lang=en
-fi
-
+tmp_file=$(mktemp)
 target_text=
 
-while read -p "変換文字列入力:" line
-do
-    target_text+="$line. "
-done
+if [[ -r $1 ]] ; then
+    while read line
+    do
+        echo "${line}" \
+            |sed -E 's/([^0-9])[.]([^0-9])/\1.\n\2/g' \
+            >> "${tmp_file}"
+    done < "$1"
+else
+    while read line
+    do
+        echo "${line}" \
+            |sed -E 's/([^0-9])[.]([^0-9])/\1.\n\2/g' \
+            >> "${tmp_file}"
+    done
+fi
 
 echo
 
@@ -68,35 +86,42 @@ vqd=$(echo ${result} | \
 #翻訳URL
 url="${base_url}translation.js?vqd=${vqd}&query=${query_parameter}&to=${to_lang}"
 
-if [[ -z $target_text ]] ; then
-  cat <<-'EOL'
-
-trans_ddg.sh [-f jp] file
-
- -f jp 日本語から英語に変換
-  file 変換する文字列
-
-EOL
-  exit 1
-fi
-
-one_line_data="$(echo -e $target_text)"
-
-declare -i data_length="${#one_line_data}"
-
-for (( i = 0; i < $data_length; i = i + 2000 ))
-do
-  post_data="${one_line_data:$i:2000}"
-
+#翻訳
+function trans
+{
     result=$(curl \
-        -X POST \
-        -s \
-        -d "$post_data" \
-        "$url" \
+            -X POST \
+            -s \
+            -d "$(cat $1)" \
+            "$url" \
         |sed -E -e 's/\{"detected_language":.+,"translated":"//g' \
             -e 's/"}//' \
     )
 
-    echo -e "$result"
-done
+    echo -e "$result" |sed -E 's/。/。\n/g'
+
+}
+
+declare -i trans_max_length=500
+declare -i trans_length=0
+trans_data=$(mktemp)
+
+while read line
+do
+    trans_length+=${#line}
+    echo "${line}" >> "${trans_data}"
+
+    if [[ ${line:-1,1} == \. ]] || \
+        [[ ${trans_length} -ge ${trans_max_length} ]]
+    then
+        trans "${trans_data}"
+        trans_length=0
+        :>"${trans_data}"
+    fi
+
+done < "${tmp_file}"
+
+trans "${trans_data}"
+
+
 
