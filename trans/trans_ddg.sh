@@ -2,59 +2,137 @@
 #
 # DuckDuckGo翻訳を使う
 #
-# @example
-# trans_x.sh <<EOL
-#  A history is GA loving for me!
-#  Do you have a book?
-#  Please lend me.
-#EOL
-#
-#
 
 set -e
 #set -x
 
-cd "$(cd $(dirname ${BASH_SOURCE[0]:-}); pwd)"
-
-target_text=
-
-while read -p "変換文字列入力:" line
-do
-    target_text+="$line. "
-done
-
-echo
-
-#翻訳ページURL
-url='https://duckduckgo.com/translation.js?vqd=3-144500552568568982516478253929298182282-63357618217516674028808065029482649975&query=%E7%BF%BB%E8%A8%B3%20a&from=en&to=ja'
-
-if [[ -z $target_text ]] ; then
+if [[ $1 == --help ]] ; then
   cat <<-'EOL'
 
-trans_x.sh [text]
-  text 変換する文字列
+trans_ddg.sh [OPTIONS] 標準入力
+
+ OPTIONS
+  -f LANG
+    LANGから日本語変換
+    LANG:enなど
+　-j
+    日本語から英語に変換
+
+ trans_ddg.sh <<EOL
+ >this is
+ >a pen
+ >EOL
+
+ ヒアストリング
+ trans_ddg.sh <<< 'this is a pen'
+
+ ファイル
+ cat FILE |trans_ddg.sh
+ trans_ddg.sh <FILE
 
 EOL
   exit 1
 fi
 
-one_line_data="$(echo -e $target_text)"
+cd "$(cd $(dirname ${BASH_SOURCE[0]:-}); pwd)"
 
-declare -i data_length="${#one_line_data}"
+from_lang=en
+to_lang=ja
 
-for (( i = 0; i < $data_length; i = i + 2000 ))
+while getopts f:j opt
 do
-  post_data="${one_line_data:$i:2000}"
+    case "${opt}" in
+        f)
+            from_lang=${OPTARG,,[A-Z]}
+            shift 2
+            ;;
+        j)
+            from_lang=ja
+            to_lang=en
+            shift
+            ;;
+    esac
+done
 
+tmp_file=$(mktemp)
+target_text=
+
+if [[ -r $1 ]] ; then
+    cat $1 |while read line
+    do
+        echo "${line}" \
+            |sed -E 's/([^0-9])[.]([^0-9])/\1.\n\2/g' \
+            >> "${tmp_file}"
+    done < "$1"
+else
+    cat $1 |while read line
+    do
+        echo "${line}" \
+            |sed -E 's/([^0-9])[.]([^0-9])/\1.\n\2/g' \
+            >> "${tmp_file}"
+    done
+fi
+
+echo
+
+#翻訳ページURL
+base_url='https://duckduckgo.com/'
+
+#queryパラメータ
+query_parameter="翻訳　slow"
+
+#token取得
+result="$(curl --silent ${base_url}?q=${query_parameter})"
+
+[[ -z $result ]] && echo "token get request error" && exit 11
+
+vqd=$(echo ${result} | \
+    sed -E \
+    -e "s/^(.+)vqd=(.+)/\2/" \
+    -e "s/(.+)(&p_ent.+)/\1/" \
+)
+
+[[ -z $vqd ]] && echo "token get error" && exit 11
+
+#翻訳URL
+url="${base_url}translation.js?vqd=${vqd}&query=${query_parameter}&to=${to_lang}"
+
+#翻訳
+function trans
+{
     result=$(curl \
-        -X POST \
-        -s \
-        -d "$post_data" \
-        "$url" \
-        |sed -E -e 's/\{"detected_language":null,"translated":"//g' \
+            -X POST \
+            -s \
+            -d "$(cat $1)" \
+            "$url" \
+        |sed -E -e 's/\{"detected_language":.+,"translated":"//g' \
             -e 's/"}//' \
     )
 
-    echo -e "$result"
-done
+    echo -e "$result" |sed -E 's/。/。\n/g'
+
+}
+
+declare -i trans_max_length=500
+declare -i trans_length=0
+trans_data=$(mktemp)
+
+while read line
+do
+    trans_length+=${#line}
+    echo "${line}" >> "${trans_data}"
+
+    if [[ ${line:-1,1} == \. ]] || \
+        [[ ${trans_length} -ge ${trans_max_length} ]]
+    then
+        trans "${trans_data}"
+        trans_length=0
+        :>"${trans_data}"
+    fi
+
+done < "${tmp_file}"
+
+trans "${trans_data}"
+
+
 
