@@ -9,7 +9,7 @@ set -e
 if [[ $1 == --help ]] ; then
   cat <<-'EOL'
 
-trans_ddg. [OPTIONS] file
+trans_ddg.sh [OPTIONS] 標準入力
 
  OPTIONS
   -f LANG
@@ -17,7 +17,18 @@ trans_ddg. [OPTIONS] file
     LANG:enなど
 　-j
     日本語から英語に変換
- file 変換する文字列 または ヒアドキュメント
+
+ trans_ddg.sh <<EOL
+ >this is
+ >a pen
+ >EOL
+
+ ヒアストリング
+ trans_ddg.sh <<< 'this is a pen'
+
+ ファイル
+ cat FILE |trans_ddg.sh
+ trans_ddg.sh <FILE
 
 EOL
   exit 1
@@ -47,14 +58,14 @@ tmp_file=$(mktemp)
 target_text=
 
 if [[ -r $1 ]] ; then
-    while read line
+    cat $1 |while read line
     do
         echo "${line}" \
             |sed -E 's/([^0-9])[.]([^0-9])/\1.\n\2/g' \
             >> "${tmp_file}"
     done < "$1"
 else
-    while read line
+    cat $1 |while read line
     do
         echo "${line}" \
             |sed -E 's/([^0-9])[.]([^0-9])/\1.\n\2/g' \
