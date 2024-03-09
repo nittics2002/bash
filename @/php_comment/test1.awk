@@ -65,5 +65,50 @@ BEBIN {
     } else {
         print $0
     }
+
+    function output_queue()
+    {
+        for(i=0; i<length(queue); i++) {
+            print queue[i]
+            delete queue[i]
+        }
+
+        queue_count = 0
+        queue[queue_count] = ""
+    }
+
+    function make_comment()
+    {
+        #インデント数カウント
+        split(queue[0], ar1, /(f|p)/)
+        indent_length = length(ar1)
+        
+        #インデント作成
+        indent = ""
+        for(i=0; i<indent_length; i++) {
+            indent = indent" "
+        }
+        
+        print indent"/**"
+
+        for(i=0; i<length(queue); i++) {
+            #function行
+            if(match(queue[i], /function/)) {
+                #引数含む
+                if(match(queue[i], /\)/)) {
+                    arg_start = index(queue[1], "(")
+                    arg_end = index(queue[1], ")")
+
+
+                }
+            } else {
+                split(queue[1], ar, //)
+
+            print indent
+        }
+        
+        print indent"*/"
+    }
+
 }
 
