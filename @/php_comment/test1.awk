@@ -24,7 +24,7 @@ BEBIN {
     } else if(is_comment == 1) {
         print $0
     #method開始
-    } else if(match($0, /^[[:space:]]*(final[[:space:]]+)?((public|protected|privete)[[:space:]]+)?(function[[:space:]]*).*$/)) {
+    } else if(match($0, /^[[:space:]]*(final[[:space:]]+)?(abstract[[space:]]+)?((public|protected|privete)[[:space:]]+)?(function[[:space:]]*).*$/)) {
         queue[queue_count] = $0
         queue_count++
         arg_line = 1
@@ -101,10 +101,9 @@ BEBIN {
 
 
                 }
-            } else {
-                split(queue[1], ar, //)
+            #変数あり
+            } else if(match(queue[i], /\$/)) {
 
-            print indent
         }
         
         print indent"*/"
