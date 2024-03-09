@@ -1,6 +1,8 @@
-# phpソースにphpdoc追加
+# phpdoc comment awk
 
-## 230503
+## 240309
 
-- test12
-    - if文　関数のreturnは == true とか必要
+functionを見つけた後、queueから引数を見つけ出し、コメントを作成、出力する所再検討
+
+
+
