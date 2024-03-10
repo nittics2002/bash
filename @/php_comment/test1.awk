@@ -66,6 +66,9 @@ BEBIN {
         print $0
     }
 
+    #
+    # キュー出力
+    #
     function output_queue()
     {
         for(i=0; i<length(queue); i++) {
@@ -77,6 +80,9 @@ BEBIN {
         queue[queue_count] = ""
     }
 
+    #
+    # コメント作成
+    #
     function make_comment()
     {
         #インデント数カウント
@@ -101,13 +107,65 @@ BEBIN {
 
 
                 }
-            #変数あり
+            #引数行
             } else if(match(queue[i], /\$/)) {
-
+                output_arg_comment(queue[i], indent) 
+            #戻値行
+            } else if(match(queue[i], /:/)) {
+                output_return_comment(queue[i], indent) 
+            }
         }
         
         print indent"*/"
     }
 
+    #
+    # 引数コメント出力
+    #
+    # @param string row
+    # @param string indent
+    #
+    function output_arg_comment(  row, indent)
+    {
+        split(row, ar, /\$/)
+
+        type = trim(ar[0])
+
+        if(length(type) == 0) {
+            type = "mixed"
+        }
+
+        arg = trim(ar[1])
+
+        print sprintf("%s* @param %s %s", indent, type, arg)
+    }
+
+    #
+    # 戻値コメント出力
+    #
+    # @param string row
+    # @param string indent
+    #
+    function output_return_comment(  row, indent)
+    {
+        split(row, ar, /:/)
+
+        gsub(/[^A-Za-z0-9_]/, "", ar[1])
+
+        print sprintf("%s* @return %s", indent, ar[1])
+    }
+
+    #
+    # trim
+    #
+    # @param string str
+    # @return string
+    #
+    function trim(  str)str
+    {
+        gsub(/^[[:space:]]+/, "", str)
+        gsub(/[[:space:]]+$/, "", str)
+        return str 
+    }
 }
 

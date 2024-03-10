@@ -1,9 +1,8 @@
 # phpdoc comment awk
 
-## 240309
+## 240310
 
-make_commentで引数の抽出方法は?
-
+要デバッグ
 
 
 
