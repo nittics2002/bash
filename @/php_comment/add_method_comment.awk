@@ -1,5 +1,5 @@
 #
-# php
+# php_method_comment
 # 
 # @version
 #
@@ -162,6 +162,23 @@ BEBIN {
                 output_return_comment(contents[i], indent) 
             }
         }
+    }
+
+    #
+    # 関数コメント出力
+    #
+    # @param string row
+    # @param string indent
+    #
+    function output_arg_comment(  row, indent)
+    {
+        split(row, ar, /function/)
+
+        name = trim(ar[1])
+
+        gsub(/\(/, "", name)
+
+        print sprintf("%s* %s", indent, name)
     }
 
     #
