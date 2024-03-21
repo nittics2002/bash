@@ -97,71 +97,26 @@ BEBIN {
         
         print indent"/**"
 
-        contents_count = 0
-        contents[contents_count]=""
-
         for(i=0; i<length(queue); i++) {
             #function行
             if(match(queue[i], /function/)) {
                 #引数含む
                 if(match(queue[i], /\)/)) {
-                    arg_start = index(queue[i], "(")
-                    arg_end = index(queue[i], ")")
+                    arg_start = index(queue[1], "(")
+                    arg_end = index(queue[1], ")")
 
-                    contents[contents_count] = substr(queue[i], 0, arg_start)
-                    contents_count++
 
-                    argstr = substr(queue[i],arg_start, arg_end - arg_start)
-                    split(argstr, args, /,/)
-                    
-                    for(j=0; j<length(args); j++) {
-                        contents[contents_count] = args[i]
-                        contents_count++
-                    }
-
-                    contents[contents_count] = substr(queue[i], arg_end)
-                    contents_count++
-
-                } else {
-                    contents[contents_count] = queue[i]
-                    contents_count++
                 }
             #引数行
             } else if(match(queue[i], /\$/)) {
-                contents[contents_count] = queue[i]
-                contents_count++
+                output_arg_comment(queue[i], indent) 
             #戻値行
             } else if(match(queue[i], /:/)) {
-                contents[contents_count] = queue[i]
-                contents_count++
+                output_return_comment(queue[i], indent) 
             }
         }
         
-        output_comment(contents, indent)
-
         print indent"*/"
-    }
-
-    #
-    # コメント出力
-    #
-    # @param string row
-    # @param string indent
-    #
-    function output_comment(  contents, indent)
-    {
-        for(i=0; i<length(contents); i++) {
-            #function行
-            if(match(contents[i], /function/)) {
-                output_function_name(contents[i], indent) 
-            #引数行
-            } else if(match(contents[i], /\$/)) {
-                output_arg_comment(contents[i], indent) 
-            #戻値行
-            } else if(match(contents[i], /:/)) {
-                output_return_comment(contents[i], indent) 
-            }
-        }
     }
 
     #
