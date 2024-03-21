@@ -65,169 +65,169 @@ BEBIN {
     } else {
         print $0
     }
+}
 
-    #
-    # キュー出力
-    #
-    function output_queue()
-    {
-        for(i=0; i<length(queue); i++) {
-            print queue[i]
-            delete queue[i]
-        }
-
-        queue_count = 0
-        queue[queue_count] = ""
+#
+# キュー出力
+#
+function output_queue()
+{
+    for(i=0; i<length(queue); i++) {
+        print queue[i]
+        delete queue[i]
     }
 
-    #
-    # コメント作成
-    #
-    function make_comment()
-    {
-        #インデント数カウント
-        split(queue[0], ar1, /(f|p)/)
-        indent_length = length(ar1)
-        
-        #インデント作成
-        indent = ""
-        for(i=0; i<indent_length; i++) {
-            indent = indent" "
-        }
-        
-        print indent"/**"
+    queue_count = 0
+    queue[queue_count] = ""
+}
 
-        contents_count = 0
-        contents[contents_count]=""
+#
+# コメント作成
+#
+function make_comment()
+{
+    #インデント数カウント
+    split(queue[0], ar1, /(f|p)/)
+    indent_length = length(ar1)
+    
+    #インデント作成
+    indent = ""
+    for(i=0; i<indent_length; i++) {
+        indent = indent" "
+    }
+    
+    print indent"/**"
 
-        for(i=0; i<length(queue); i++) {
-            #function行
-            if(match(queue[i], /function/)) {
-                #引数含む
-                if(match(queue[i], /\)/)) {
-                    arg_start = index(queue[i], "(")
-                    arg_end = index(queue[i], ")")
+    contents_count = 0
+    contents[contents_count]=""
 
-                    contents[contents_count] = substr(queue[i], 0, arg_start)
-                    contents_count++
+    for(i=0; i<length(queue); i++) {
+        #function行
+        if(match(queue[i], /function/)) {
+            #引数含む
+            if(match(queue[i], /\)/)) {
+                arg_start = index(queue[i], "(")
+                arg_end = index(queue[i], ")")
 
-                    argstr = substr(queue[i],arg_start, arg_end - arg_start)
-                    split(argstr, args, /,/)
-                    
-                    for(j=0; j<length(args); j++) {
-                        contents[contents_count] = args[i]
-                        contents_count++
-                    }
+                contents[contents_count] = substr(queue[i], 0, arg_start)
+                contents_count++
 
-                    contents[contents_count] = substr(queue[i], arg_end)
-                    contents_count++
-
-                } else {
-                    contents[contents_count] = queue[i]
+                argstr = substr(queue[i],arg_start, arg_end - arg_start)
+                split(argstr, args, /,/)
+                
+                for(j=0; j<length(args); j++) {
+                    contents[contents_count] = args[i]
                     contents_count++
                 }
-            #引数行
-            } else if(match(queue[i], /\$/)) {
-                contents[contents_count] = queue[i]
+
+                contents[contents_count] = substr(queue[i], arg_end)
                 contents_count++
-            #戻値行
-            } else if(match(queue[i], /:/)) {
+
+            } else {
                 contents[contents_count] = queue[i]
                 contents_count++
             }
-        }
-        
-        output_comment(contents, indent)
-
-        print indent"*/"
-    }
-
-    #
-    # コメント出力
-    #
-    # @param string row
-    # @param string indent
-    #
-    function output_comment(  contents, indent)
-    {
-        for(i=0; i<length(contents); i++) {
-            #function行
-            if(match(contents[i], /function/)) {
-                output_function_name(contents[i], indent) 
-            #引数行
-            } else if(match(contents[i], /\$/)) {
-                output_arg_comment(contents[i], indent) 
-            #戻値行
-            } else if(match(contents[i], /:/)) {
-                output_return_comment(contents[i], indent) 
-            }
+        #引数行
+        } else if(match(queue[i], /\$/)) {
+            contents[contents_count] = queue[i]
+            contents_count++
+        #戻値行
+        } else if(match(queue[i], /:/)) {
+            contents[contents_count] = queue[i]
+            contents_count++
         }
     }
+    
+    output_comment(contents, indent)
 
-    #
-    # 関数コメント出力
-    #
-    # @param string row
-    # @param string indent
-    #
-    function output_arg_comment(  row, indent)
-    {
-        split(row, ar, /function/)
+    print indent"*/"
+}
 
-        name = trim(ar[1])
-
-        gsub(/\(/, "", name)
-
-        print sprintf("%s* %s", indent, name)
-    }
-
-    #
-    # 引数コメント出力
-    #
-    # @param string row
-    # @param string indent
-    #
-    function output_arg_comment(  row, indent)
-    {
-        split(row, ar, /\$/)
-
-        type = trim(ar[0])
-
-        if(length(type) == 0) {
-            type = "mixed"
+#
+# コメント出力
+#
+# @param string row
+# @param string indent
+#
+function output_comment(  contents, indent)
+{
+    for(i=0; i<length(contents); i++) {
+        #function行
+        if(match(contents[i], /function/)) {
+            output_function_comment(contents[i], indent) 
+        #引数行
+        } else if(match(contents[i], /\$/)) {
+            output_arg_comment(contents[i], indent) 
+        #戻値行
+        } else if(match(contents[i], /:/)) {
+            output_return_comment(contents[i], indent) 
         }
+    }
+}
 
-        arg = trim(ar[1])
+#
+# 関数コメント出力
+#
+# @param string row
+# @param string indent
+#
+function output_function_comment(  row, indent)
+{
+    split(row, ar, /function/)
 
-        print sprintf("%s* @param %s %s", indent, type, arg)
+    name = trim(ar[1])
+
+    gsub(/\(/, "", name)
+
+    print sprintf("%s* %s", indent, name)
+}
+
+#
+# 引数コメント出力
+#
+# @param string row
+# @param string indent
+#
+function output_arg_comment(  row, indent)
+{
+    split(row, ar, /\$/)
+
+    type = trim(ar[0])
+
+    if(length(type) == 0) {
+        type = "mixed"
     }
 
-    #
-    # 戻値コメント出力
-    #
-    # @param string row
-    # @param string indent
-    #
-    function output_return_comment(  row, indent)
-    {
-        split(row, ar, /:/)
+    arg = trim(ar[1])
 
-        gsub(/[^A-Za-z0-9_]/, "", ar[1])
+    print sprintf("%s* @param %s %s", indent, type, arg)
+}
 
-        print sprintf("%s* @return %s", indent, ar[1])
-    }
+#
+# 戻値コメント出力
+#
+# @param string row
+# @param string indent
+#
+function output_return_comment(  row, indent)
+{
+    split(row, ar, /:/)
 
-    #
-    # trim
-    #
-    # @param string str
-    # @return string
-    #
-    function trim(  str)str
-    {
-        gsub(/^[[:space:]]+/, "", str)
-        gsub(/[[:space:]]+$/, "", str)
-        return str 
-    }
+    gsub(/[^A-Za-z0-9_]/, "", ar[1])
+
+    print sprintf("%s* @return %s", indent, ar[1])
+}
+
+#
+# trim
+#
+# @param string str
+# @return string
+#
+function trim(  str)
+{
+    gsub(/^[[:space:]]+/, "", str)
+    gsub(/[[:space:]]+$/, "", str)
+    return str 
 }
 
