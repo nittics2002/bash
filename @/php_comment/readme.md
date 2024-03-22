@@ -2,6 +2,9 @@
 
 ## 240310
 
+splitの結果は ar[1],ar[2],....
+要見直し
+
 method_comment 永久ループエラー
 functionを別ファイル分割
 テストで動作確認

@@ -8,14 +8,15 @@
 cd $(dirname $0)
 
 src_dir=../functions
-script_name=trim.test
+original_name=trim
+script_name=../tmp/trim.test
 
 function makeTestFile()
 {
-cat <<EOL ${src_dir}/trim.awk > "${script_name}"
+cat <<'EOL' ${src_dir}/${original_name}.awk > "${script_name}"
 {
-    trimed=trim($0)
-    trint $0
+    ret=trim($1)
+    print "${ret}"
 }
 EOL
 }
@@ -39,6 +40,9 @@ expects[1]='ABC'
 data[2]=' A BC'
 expects[2]='A BC'
 
+data[3]='A BC  '
+expects[3]='A BC'
+
 echo "...START(OK if there is no failure)"
 
 for(( i=0; i<${#data[@]}; i++ ))
@@ -50,7 +54,7 @@ do
 
     #echo "${actual}"
 
-    [[ ! ${actual}==${expects[$i]} ]] && echo "failure=${i}"
+    [[ ${actual} != ${expects[$i]} ]] && echo "failure=${i}"
    
 done
 
