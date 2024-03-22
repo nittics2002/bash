@@ -1,7 +1,6 @@
 #!/bin/bash
 #
-#
-#
+# test trim.awk
 #
 #set -e
 #set -x
@@ -13,15 +12,12 @@ script_name=trim.test
 
 function makeTestFile()
 {
-    if [[ ! -f ${script_name} ]]
-    then
-        cat <<EOL ${src_dir}/trim.awk >> "${script_name}"
+cat <<EOL ${src_dir}/trim.awk > "${script_name}"
 {
     trimed=trim($0)
     trint $0
 }
 EOL
-    fi
 }
 
 function callFunction()
@@ -43,7 +39,7 @@ expects[1]='ABC'
 data[2]=' A BC'
 expects[2]='A BC'
 
-echo "...START"
+echo "...START(OK if there is no failure)"
 
 for(( i=0; i<${#data[@]}; i++ ))
 do
