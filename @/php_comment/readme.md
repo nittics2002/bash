@@ -2,8 +2,10 @@
 
 ## 240310
 
-splitの結果は ar[1],ar[2],....
-要見直し
+test/output_arg_comment.sh 改行が入る?
+
+
+
 
 method_comment 永久ループエラー
 functionを別ファイル分割
@@ -12,6 +14,7 @@ method_comment もデバッグコード追加
 環境変数で切り替え
 
 test/trim.sh OK
+test/output_return_comment.sh OK
 
 
 
