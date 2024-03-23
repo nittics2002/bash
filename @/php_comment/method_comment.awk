@@ -115,7 +115,7 @@ function make_comment()
                 argstr = substr(queue[i],arg_start, arg_end - arg_start)
                 split(argstr, args, /,/)
                 
-                for(j=0; j<length(args); j++) {
+                for(j=1; j<=length(args); j++) {
                     contents[contents_count] = args[i]
                     contents_count++
                 }
@@ -175,7 +175,7 @@ function output_function_comment(  row, indent)
 {
     split(row, ar, /function/)
 
-    name = trim(ar[1])
+    name = trim(ar[2])
 
     gsub(/\(/, "", name)
 
@@ -192,13 +192,13 @@ function output_arg_comment(  row, indent)
 {
     split(row, ar, /\$/)
 
-    type = trim(ar[0])
+    type = trim(ar[1])
 
     if(length(type) == 0) {
         type = "mixed"
     }
 
-    arg = trim(ar[1])
+    arg = trim(ar[2])
 
     print sprintf("%s* @param %s %s", indent, type, arg)
 }
@@ -213,9 +213,9 @@ function output_return_comment(  row, indent)
 {
     split(row, ar, /:/)
 
-    gsub(/[^A-Za-z0-9_]/, "", ar[1])
+    gsub(/[^A-Za-z0-9_]/, "", ar[2])
 
-    print sprintf("%s* @return %s", indent, ar[1])
+    print sprintf("%s* @return %s", indent, ar[2])
 }
 
 #

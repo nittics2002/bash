@@ -8,7 +8,7 @@ function output_return_comment(  row, indent)
 {
     split(row, ar, /:/)
 
-    gsub(/[^A-Za-z0-9_]/, "", ar[1])
+    gsub(/[^A-Za-z0-9_]/, "", ar[2])
 
-    print sprintf("%s* @return %s", indent, ar[1])
+    print sprintf("%s* @return %s", indent, ar[2])
 }

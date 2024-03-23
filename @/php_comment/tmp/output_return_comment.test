@@ -6,23 +6,14 @@
 #
 function output_return_comment(  row, indent)
 {
-    row="CD"
-
     split(row, ar, /:/)
 
-print row
-print length(ar)
-print ar[0]
-print ar[1]
-print ar[2]
-print "........."
+    gsub(/[^A-Za-z0-9_]/, "", ar[2])
 
-    gsub(/[^A-Za-z0-9_]/, "", ar[1])
-
-    print sprintf("%s* @return %s", indent, ar[1])
+    print sprintf("%s* @return %s", indent, ar[2])
 }
 
 {
-    ret=output_return_comment($1,$2)
+    ret=output_return_comment(row,indent)
     print ret
 }
