@@ -10,7 +10,7 @@ function usage() {
     cat <<EOL
 
 usage
-    phpunit_doc2attr.sh FILE|DIR
+    method_comment.sh FILE|DIR
 
 EOL
 
@@ -20,11 +20,11 @@ EOL
 
 if [[ -f $1 ]]
 then
-    awk -f phpunit_doc2attr.awk "$1" > "$1.new"
+    awk -f method_comment.awk "$1" > "$1.new"
 elif [[ -d $1 ]]
 then
     find "$1" -type f -name "*Test.php" |
-        xargs -I {} bash -c "awk -f phpunit_doc2attr.awk {} >{}.new"
+        xargs -I {} bash -c "awk -f method_comment.awk {} >{}.new"
 else
     usage
     exit 2

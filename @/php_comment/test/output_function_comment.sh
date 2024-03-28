@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# test output_arg_comment.awk
+# test output_function_comment.awk
 #
 #set -e
 #set -x
@@ -8,7 +8,7 @@
 cd $(dirname $0)
 
 src_dir=../functions
-original_name=output_arg_comment
+original_name=output_function_comment
 script_name=../tmp/${original_name}.test
 
 function makeTestFile()
@@ -18,7 +18,7 @@ cat ${src_dir}/${original_name}.awk \
     - <<'EOL' > "${script_name}"
 
 {
-    ret=output_arg_comment(row,indent)
+    ret=output_function_comment(row,indent)
     print ret
 }
 EOL
@@ -35,13 +35,14 @@ makeTestFile
 declare -a data
 declare -a expects
 
-data1[0]='int $number'
+data1[0]='public function func1('
 data2[0]=''
-expects[0]='* @param int $number'
+expects[0]='* func1'
 
-data1[1]='        int $number'
+data1[1]='public function func1('
 data2[1]='    '
-expects[1]='    * @param int $number'
+expects[1]='    * func1'
+
 
 echo "...START(OK if there is no failure)"
 
