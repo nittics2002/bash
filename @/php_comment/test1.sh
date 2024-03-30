@@ -4,7 +4,7 @@
 # @version
 #
 set -e
-set -x
+#set -x
 
 #####
 #usage

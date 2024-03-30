@@ -30,7 +30,7 @@ BEGIN {
         arg_line = 1
 
         #1行method
-        if(match($0, /^.+{$/)) {
+        if(match($0, /^.+\{$/)) {
             arg_line = 0
 
             #コメント行あり
@@ -63,7 +63,7 @@ BEGIN {
         queue[queue_count] = $0
         queue_count++
     } else {
-        print $0
+        #print $0
     }
 }
 
