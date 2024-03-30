@@ -14,15 +14,15 @@ BEGIN {
     #コメント行開始
     if (match($0, /^[[:space:]]*\/\*+/)) {
         is_comment = 1
-        print $0
+        #print $0
         has_comment = 1
     #コメント行終了
     } else if(match($0, /^ *\*+\/ *$/)) {
         is_comment = 0
-        print $0
+        #print $0
     #コメント行途中
     } else if(is_comment == 1) {
-        print $0
+        #print $0
     #method開始
     } else if(match($0, /^[[:space:]]*(final[[:space:]]+)?(abstract[[space:]]+)?((public|protected|privete)[[:space:]]+)?(function[[:space:]]*).*$/)) {
         queue[queue_count] = $0

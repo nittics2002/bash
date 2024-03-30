@@ -9,13 +9,9 @@ class ClassName
  */
 {
 {
-    /**
 /**
-     * コメントあり
 * コメントあり
-     *
 *
-     */
 */
 public function func1()
     public function func1()
@@ -32,13 +28,9 @@ public function foo(int $arg1, &$arg2, $arg3 = [])
 // method body
 }
 
-    /**
 /**
-     * コメントあり
 * コメントあり
-     *
 *
-     */
 */
 public function bar(int $arg1, &$arg2, $arg3 = [])
     public function bar(int $arg1, &$arg2, $arg3 = [])

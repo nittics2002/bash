@@ -2,7 +2,13 @@
 
 ## 240310
 
-print $0は不要っぽい
+```
+
+class AAA
+{　・・このclassの{を認識してコメント行が入る
+
+```
+
 
 test/output_arg_comment.sh 改行が入る?
 
