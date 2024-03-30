@@ -4,8 +4,11 @@
 # @version
 #
 set -e
-#set -x
+set -x
 
+#####
+#usage
+#####
 function usage() {
     cat <<EOL
 
@@ -16,11 +19,23 @@ EOL
 
 }
 
+#####
+#main
+#####
 [[ $# -ne 1 ]] && usage && exit 1
+
+script_path="$(dirname $0)"
 
 if [[ -f $1 ]]
 then
-    awk -f method_comment.awk "$1" > "$1.new"
+    awk \
+        -f "${script_path}/method_comment.awk" \
+        -f "${script_path}/functions/output_arg_comment.awk" \
+        -f "${script_path}/functions/output_function_comment.awk" \
+        -f "${script_path}/functions/output_return_comment.awk" \
+        -f "${script_path}/functions/trim.awk" \
+        "$1" > "$1.new"
+        
 elif [[ -d $1 ]]
 then
     find "$1" -type f -name "*Test.php" |

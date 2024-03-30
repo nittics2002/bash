@@ -3,7 +3,7 @@
 # 
 # @version
 #
-BEBIN {
+BEGIN {
     queue_count = 0
     queue[queue_count]=""
     is_comment = 0
@@ -164,70 +164,3 @@ function output_comment(  contents, indent)
         }
     }
 }
-
-#
-# 関数コメント出力
-#
-# @param string row
-# @param string indent
-#
-function output_function_comment(  row, indent)
-{
-    split(row, ar, /function/)
-
-    name = trim(ar[2])
-
-    gsub(/\(/, "", name)
-
-    print sprintf("%s* %s", indent, name)
-}
-
-#
-# 引数コメント出力
-#
-# @param string row
-# @param string indent
-#
-function output_arg_comment(  row, indent)
-{
-    split(row, ar, /\$/)
-
-    type = trim(ar[1])
-
-    if(length(type) == 0) {
-        type = "mixed"
-    }
-
-    arg = trim(ar[2])
-
-    print sprintf("%s* @param %s %s", indent, type, arg)
-}
-
-#
-# 戻値コメント出力
-#
-# @param string row
-# @param string indent
-#
-function output_return_comment(  row, indent)
-{
-    split(row, ar, /:/)
-
-    gsub(/[^A-Za-z0-9_]/, "", ar[2])
-
-    print sprintf("%s* @return %s", indent, ar[2])
-}
-
-#
-# trim
-#
-# @param string str
-# @return string
-#
-function trim(  str)
-{
-    gsub(/^[[:space:]]+/, "", str)
-    gsub(/[[:space:]]+$/, "", str)
-    return str 
-}
-

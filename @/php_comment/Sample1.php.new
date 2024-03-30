@@ -1,0 +1,101 @@
+<?php
+<?php
+
+
+namespace dev/excel;
+namespace dev/excel;
+
+
+use RuntimeException;
+use RuntimeException;
+
+
+class ClassName
+class ClassName
+ /**
+ */
+{
+{
+    /**
+/**
+     * コメントあり
+* コメントあり
+     *
+*
+     */
+*/
+public function func1()
+    public function func1()
+{
+
+
+    }
+}
+
+
+public function foo(int $arg1, &$arg2, $arg3 = [])
+    /**
+    * foo
+    */
+    public function foo(int $arg1, &$arg2, $arg3 = [])
+{
+        // method body
+// method body
+    }
+}
+
+
+    /**
+/**
+     * コメントあり
+* コメントあり
+     *
+*
+     */
+*/
+public function bar(int $arg1, &$arg2, $arg3 = [])
+    public function bar(int $arg1, &$arg2, $arg3 = [])
+{
+        // method body
+// method body
+    }
+}
+
+
+public function aVeryLongMethodName(
+ClassTypeHint $arg1,
+&$arg2,
+array $arg3 = []
+) {
+// method body
+}
+
+public function functionName(int $arg1, $arg2): string
+   /**
+   * aVeryLongMethodName
+   * @param ClassTypeHint $arg1,
+   * @param & $arg2,
+   * @param array $arg3 = []
+   * 
+   * @return string
+   */
+    public function aVeryLongMethodName(
+        ClassTypeHint $arg1,
+        &$arg2,
+        array $arg3 = []
+    ) {
+{
+        return 'foo';
+return 'foo';
+    }
+}
+
+
+public function anotherFunction(
+string $foo,
+string $bar,
+int $baz
+): string {
+return 'foo';
+}
+}
